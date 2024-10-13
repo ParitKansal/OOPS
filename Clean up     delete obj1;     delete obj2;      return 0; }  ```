@@ -67,7 +67,9 @@ ERROR!
 ```
 -------
 
-### Using Virtual Inheritance
+## Using Virtual Inheritance
+
+### Code
 ```C++
 #include <iostream>
 
@@ -114,7 +116,7 @@ int main() {
 }
 ```
 
-### Output
+#### Output
 ```output
 /tmp/RuDCeEhFjF.o
 Class B
