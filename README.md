@@ -229,7 +229,7 @@ In Java, the garbage collector automatically deletes the useless objects so ther
 
 **Can we overload the constructor in a class?**
 
-Yes We can overload the constructor in a class in Java. Constructor Overloading is done when we want constructor with different constructor with different parameter (Number and Type).
+Yes, constructor overloading is done when we want to define multiple constructors with different parameters (number and type).
 
 **Can we overload the destructor in a class?**
 
