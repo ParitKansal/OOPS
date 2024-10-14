@@ -1,5 +1,5 @@
-**OOPS**
-
+# **OOPS**
+______
 **What is Object Oriented Programming (OOPs)?**
 
 O*bject* O*riented* P*rogramming* (also known as OOPs) is a programming paradigm where the complete software is formed by objects which talk with each other.
