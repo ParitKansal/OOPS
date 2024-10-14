@@ -1,10 +1,88 @@
+# Problem in Multiple Inheritance
+
+### Code
+
+```C++
+#include <iostream>
+
+class A{
+public:
+    void fun() {
+        std::cout << "Class A" << std::endl;
+    }
+};
+
+class B{
+public:
+    void fun() {
+        std::cout << "Class B" << std::endl;
+    }
+};
+
+// Derived class inherits from B and A
+class C : public A, public B {
+    
+};
+
+int main() {
+    C obj;
+
+    obj.fun();
+
+    return 0;
+}
+```
+#### Output
+```output
+/tmp/KeEYwH8ueM.cpp: In function 'int main()':
+/tmp/KeEYwH8ueM.cpp:25:9: error: request for member 'fun' is ambiguous
+   25 |     obj.fun();
+      |         ^~~
+/tmp/KeEYwH8ueM.cpp:13:10: note: candidates are: 'void B::fun()'
+   13 |     void fun() {
+      |          ^~~
+/tmp/KeEYwH8ueM.cpp:6:10: note:                 'void A::fun()'
+    6 |     void fun() {
+      |          ^~~
+```
+
+## Solution 1
+
+### Code
+```C++
+class C : public A, public B {
+public:
+    void callAFun() {
+        A::fun();
+    }
+
+    void callBFun() {
+        B::fun();
+    }
+};
+```
+
+## Solution 2
+
+### Code
+```C++
+class C : public A, public B {
+public:
+    void fun() {
+        A::fun();
+    }
+};
+```
+-----
+
+-----
+
 # Diamond Problem in Hybrid Inheritance
 
 ### Code
 ```C++
 #include <iostream>
 
-// Base class
 class A {
 public:
     void displayA() {
@@ -12,7 +90,6 @@ public:
     }
 };
 
-// Intermediate class derived from Base class A
 class B : public A {
 public:
     void displayB() {
@@ -20,7 +97,6 @@ public:
     }
 };
 
-// Another Intermediate class derived from Base class A
 class C : public A {
 public:
     void displayC() {
@@ -28,7 +104,6 @@ public:
     }
 };
 
-// Derived class using multiple inheritance from B and C
 class D : public B, public C {
 public:
     void displayD() {
@@ -39,10 +114,9 @@ public:
 int main() {
     D obj;
 
-    // Access methods from different base classes
-    obj.displayB();  // From class B
-    obj.displayC();  // From class C
-    obj.displayD();  // From class D
+    obj.displayB();
+    obj.displayC();
+    obj.displayD();
 
     // Ambiguity arises here because both B and C inherit from A
     // This causes ambiguity: which displayA() to call?
@@ -65,15 +139,13 @@ ERROR!
       |          ^~~~~~~~
 /tmp/URFRpemY87.cpp:6:10: note:                 'void A::displayA()'
 ```
--------
 
-## Using Virtual Inheritance
+## Solution - Using Virtual Inheritance
 
 ### Code
 ```C++
 #include <iostream>
 
-// Base class with virtual inheritance
 class A {
 public:
     void displayA() {
@@ -81,7 +153,6 @@ public:
     }
 };
 
-// Intermediate classes use virtual inheritance from A
 class B : virtual public A {
 public:
     void displayB() {
@@ -96,7 +167,6 @@ public:
     }
 };
 
-// Derived class inherits from B and C
 class D : public B, public C {
 public:
     void displayD() {
@@ -107,9 +177,9 @@ public:
 int main() {
     D obj;
 
-    obj.displayB();  // From class B
-    obj.displayC();  // From class C
-    obj.displayD();  // From class D
+    obj.displayB();
+    obj.displayC();
+    obj.displayD();
     obj.displayA();  // Now works correctly due to virtual inheritance
 
     return 0;
