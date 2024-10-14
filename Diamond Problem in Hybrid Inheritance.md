@@ -185,12 +185,3 @@ int main() {
     return 0;
 }
 ```
-
-#### Output
-```output
-/tmp/RuDCeEhFjF.o
-Class B
-Class C
-Class D
-Class A
-```
